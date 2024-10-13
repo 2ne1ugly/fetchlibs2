@@ -1,0 +1,2 @@
+zulu17.52.17-ca-jdk17.0.12-linux_x64.zip filter=lfs diff=lfs merge=lfs -text
+zulu17.52.17-ca-jdk17.0.12-win_x64.zip filter=lfs diff=lfs merge=lfs -text

@@ -1,0 +1,672 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.rabbitmq</groupId>
+  <artifactId>stream-client</artifactId>
+  <version>0.14.0</version>
+
+  <name>RabbitMQ Stream Java Client</name>
+  <description>The RabbitMQ Stream Java client library allows Java applications to interface with
+    RabbitMQ Stream.
+  </description>
+  <url>https://www.rabbitmq.com</url>
+
+  <licenses>
+    <license>
+      <name>ASL 2.0</name>
+      <url>https://www.apache.org/licenses/LICENSE-2.0.html</url>
+      <distribution>repo</distribution>
+    </license>
+    <license>
+      <name>MPL 2.0</name>
+      <url>https://www.mozilla.org/en-US/MPL/2.0/</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <email>info@rabbitmq.com</email>
+      <name>Team RabbitMQ</name>
+      <organization>VMware, Inc. or its affiliates.</organization>
+      <organizationUrl>https://rabbitmq.com</organizationUrl>
+    </developer>
+  </developers>
+
+  <organization>
+    <name>VMware, Inc. or its affiliates.</name>
+    <url>https://www.rabbitmq.com</url>
+  </organization>
+
+  <scm>
+    <url>https://github.com/rabbitmq/rabbitmq-stream-java-client</url>
+    <connection>scm:git:git://github.com/rabbitmq/rabbitmq-stream-java-client.git</connection>
+    <developerConnection>scm:git:https://github.com/rabbitmq/rabbitmq-stream-java-client.git</developerConnection>
+    <tag>v0.14.0</tag>
+  </scm>
+
+  <properties>
+    <spotless.check.skip>true</spotless.check.skip>
+    <slf4j.version>1.7.36</slf4j.version>
+    <logback.version>1.2.12</logback.version>
+    <netty.version>4.1.100.Final</netty.version>
+    <proton-j.version>0.34.1</proton-j.version>
+    <metrics.version>4.2.21</metrics.version>
+    <micrometer.version>1.11.5</micrometer.version>
+    <swiftmq-client.version>12.2.2</swiftmq-client.version>
+    <picocli.version>4.7.5</picocli.version>
+    <commons-compress.version>1.24.0</commons-compress.version>
+    <zstd-jni.version>1.5.5-6</zstd-jni.version>
+    <lz4-java.version>1.8.0</lz4-java.version>
+    <snappy-java.version>1.1.10.5</snappy-java.version>
+    <junit.jupiter.version>5.10.0</junit.jupiter.version>
+    <assertj.version>3.24.2</assertj.version>
+    <mockito.version>5.6.0</mockito.version>
+    <amqp-client.version>5.20.0</amqp-client.version>
+    <commons-lang3.version>3.13.0</commons-lang3.version>
+    <commons-codec.version>1.16.0</commons-codec.version>
+    <gson.version>2.10.1</gson.version>
+    <vavr.version>0.10.4</vavr.version>
+    <paho.version>1.2.5</paho.version>
+    <micrometer-tracing-test.version>1.1.6</micrometer-tracing-test.version>
+    <micrometer-docs-generator.version>1.0.2</micrometer-docs-generator.version>
+    <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
+    <maven-surefire-plugin.version>3.2.1</maven-surefire-plugin.version>
+    <spring-boot-maven-plugin.version>2.7.6</spring-boot-maven-plugin.version>
+    <checksum.maven.plugin.version>1.11</checksum.maven.plugin.version>
+    <maven.gpg.plugin.version>3.1.0</maven.gpg.plugin.version>
+    <buildnumber.plugin.version>3.2.0</buildnumber.plugin.version>
+    <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
+    <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
+    <maven-javadoc-plugin.version>3.6.0</maven-javadoc-plugin.version>
+    <maven.jar.plugin.version>3.3.0</maven.jar.plugin.version>
+    <build-helper-maven-plugin.version>3.4.0</build-helper-maven-plugin.version>
+    <asciidoctor.maven.plugin.version>2.2.4</asciidoctor.maven.plugin.version>
+    <asciidoctorj.version>2.5.10</asciidoctorj.version>
+    <asciidoctorj.diagram.version>2.2.13</asciidoctorj.diagram.version>
+    <buildnumber.plugin.version>1.4</buildnumber.plugin.version>
+    <jmh.version>1.37</jmh.version>
+    <spotless.version>2.40.0</spotless.version>
+    <google-java-format.version>1.17.0</google-java-format.version>
+    <jacoco.version>0.8.11</jacoco.version>
+    <!-- for documentation -->
+    <broker.version>3.12</broker.version>
+    <!-- to sign artifacts when releasing -->
+    <gpg.keyname>6026DFCA</gpg.keyname>
+    <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss'Z'</maven.build.timestamp.format>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.packagecloud.wagon.version>0.0.6</maven.packagecloud.wagon.version>
+    <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
+
+    <maven.javadoc.skip>true</maven.javadoc.skip>
+    <gpg.skip>true</gpg.skip>
+  </properties>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-transport</artifactId>
+      <version>${netty.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-codec</artifactId>
+      <version>${netty.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-handler</artifactId>
+      <version>${netty.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.swiftmq</groupId>
+      <artifactId>swiftmq-client</artifactId>
+      <version>${swiftmq-client.version}</version>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.qpid</groupId>
+      <artifactId>proton-j</artifactId>
+      <version>${proton-j.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-compress</artifactId>
+      <version>${commons-compress.version}</version>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.luben</groupId>
+      <artifactId>zstd-jni</artifactId>
+      <version>${zstd-jni.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.lz4</groupId>
+      <artifactId>lz4-java</artifactId>
+      <version>${lz4-java.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.xerial.snappy</groupId>
+      <artifactId>snappy-java</artifactId>
+      <version>${snappy-java.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.dropwizard.metrics</groupId>
+      <artifactId>metrics-core</artifactId>
+      <version>${metrics.version}</version>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-core</artifactId>
+      <version>${micrometer.version}</version>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-params</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-suite-engine</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.rabbitmq</groupId>
+      <artifactId>amqp-client</artifactId>
+      <version>${amqp-client.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-transport-native-epoll</artifactId>
+      <version>${netty.version}</version>
+      <classifier>linux-x86_64</classifier>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>${assertj.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>${mockito.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.eclipse.paho</groupId>
+      <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
+      <version>${paho.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>${commons-lang3.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>${commons-codec.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>${gson.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>io.vavr</groupId>
+      <artifactId>vavr</artifactId>
+      <version>${vavr.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-tracing-integration-test</artifactId>
+      <version>${micrometer-tracing-test.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-docs-generator</artifactId>
+      <version>${micrometer-docs-generator.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.openjdk.jmh</groupId>
+      <artifactId>jmh-core</artifactId>
+      <version>${jmh.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.openjdk.jmh</groupId>
+      <artifactId>jmh-generator-annprocess</artifactId>
+      <version>${jmh.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>${junit.jupiter.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+
+    <!-- We store the client version in a Java properties file. -->
+    <resources>
+      <resource>
+        <directory>${basedir}/src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+
+    <testResources>
+      <testResource>
+        <directory>${basedir}/src/test/resources</directory>
+      </testResource>
+    </testResources>
+
+    <plugins>
+
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven.compiler.plugin.version}</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+          <compilerArgs>
+            <arg>-Xlint:deprecation</arg>
+            <arg>-Xlint:unchecked</arg>
+          </compilerArgs>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven-surefire-plugin.version}</version>
+        <configuration>
+          <excludes>
+            <exclude>**/*TestSuite.java</exclude>
+          </excludes>
+          <argLine>${test-arguments}</argLine>
+          <systemPropertyVariables>
+            <net.bytebuddy.experimental>true</net.bytebuddy.experimental>
+            <rabbitmqctl.bin>DOCKER:rabbitmq</rabbitmqctl.bin>
+          </systemPropertyVariables>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>${maven-resources-plugin.version}</version>
+        <configuration>
+          <propertiesEncoding>${project.build.sourceEncoding}</propertiesEncoding>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>${maven-javadoc-plugin.version}</version>
+        <configuration>
+          <quiet>true</quiet>
+          <source>8</source>
+          <additionalOptions>-Xdoclint:none</additionalOptions>
+          <links>
+            <link>https://netty.io/4.1/api/</link>
+<!--            <link>https://www.javadoc.io/doc/io.dropwizard.metrics/metrics-core/${metrics.version}/</link>-->
+<!--            <link>https://javadoc.io/doc/io.micrometer/micrometer-core/${micrometer.version}/</link>-->
+          </links>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.asciidoctor</groupId>
+        <artifactId>asciidoctor-maven-plugin</artifactId>
+        <version>${asciidoctor.maven.plugin.version}</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.asciidoctor</groupId>
+            <artifactId>asciidoctorj</artifactId>
+            <version>${asciidoctorj.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>org.asciidoctor</groupId>
+            <artifactId>asciidoctorj-diagram</artifactId>
+            <version>${asciidoctorj.diagram.version}</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <sourceDirectory>src/docs/asciidoc</sourceDirectory>
+          <doctype>article</doctype>
+          <embedAssets>true</embedAssets>
+          <requires>
+            <require>asciidoctor-diagram</require>
+          </requires>
+          <attributes>
+            <project-artifact-id>${project.artifactId}</project-artifact-id>
+            <project-version>${project.version}</project-version>
+            <netty-version>${netty.version}</netty-version>
+            <build-number>${buildNumber}</build-number>
+            <broker-version>${broker.version}</broker-version>
+            <imagesdir>./images</imagesdir>
+            <idprefix />
+            <idseparator>-</idseparator>
+            <source-highlighter>coderay</source-highlighter>
+            <test-examples>../../test/java/com/rabbitmq/stream/docs</test-examples>
+            <build-directory>${project.build.directory}</build-directory>
+          </attributes>
+
+        </configuration>
+        <executions>
+          <execution>
+            <id>generate-html</id>
+            <phase>pre-site</phase>
+            <goals>
+              <goal>process-asciidoc</goal>
+            </goals>
+            <configuration>
+              <backend>html5</backend>
+              <attributes>
+                <toc>left</toc>
+                <toclevels>5</toclevels>
+                <icons>font</icons>
+                <sectanchors>true</sectanchors>
+              </attributes>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>${maven-source-plugin.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>${maven.gpg.plugin.version}</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>package</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+            <configuration>
+              <keyname>${gpg.keyname}</keyname>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>buildnumber-maven-plugin</artifactId>
+        <version>${buildnumber.plugin.version}</version>
+        <configuration>
+          <doCheck>false</doCheck>
+          <doUpdate>false</doUpdate>
+          <revisionOnScmFailure>unknown</revisionOnScmFailure>
+          <shortRevisionLength>7</shortRevisionLength>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <version>${spotless.version}</version>
+        <configuration>
+          <java>
+            <excludes>
+              <exclude>src/test/java/com/rabbitmq/stream/docs/*.java</exclude>
+              <exclude>src/test/java/SanityCheck.java</exclude>
+            </excludes>
+            <googleJavaFormat>
+              <version>${google-java-format.version}</version>
+              <style>GOOGLE</style>
+            </googleJavaFormat>
+          </java>
+<!--          <ratchetFrom>origin/main</ratchetFrom>-->
+          <licenseHeader> <!-- specify either content or file, but not both -->
+            <content>// Copyright (c) $YEAR VMware, Inc. or its affiliates.  All rights reserved.
+              //
+              // This software, the RabbitMQ Stream Java client library, is dual-licensed under the
+              // Mozilla Public License 2.0 ("MPL"), and the Apache License version 2 ("ASL").
+              // For the MPL, please see LICENSE-MPL-RabbitMQ. For the ASL,
+              // please see LICENSE-APACHE2.
+              //
+              // This software is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND,
+              // either express or implied. See the LICENSE file for specific language governing
+              // rights and limitations of this software.
+              //
+              // If you have any questions regarding licensing, please contact us at
+              // info@rabbitmq.com.
+            </content>
+          </licenseHeader>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>${maven.jar.plugin.version}</version>
+        <configuration>
+          <archive>
+            <manifestEntries>
+              <Automatic-Module-Name>com.rabbitmq.stream</Automatic-Module-Name>
+              <Implementation-Version>${project.version}</Implementation-Version>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>report</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+    <extensions>
+      <extension>
+        <groupId>io.packagecloud.maven.wagon</groupId>
+        <artifactId>maven-packagecloud-wagon</artifactId>
+        <version>${maven.packagecloud.wagon.version}</version>
+      </extension>
+    </extensions>
+  </build>
+
+  <profiles>
+
+    <profile>
+      <id>snapshots</id>
+      <properties>
+        <maven.javadoc.skip>false</maven.javadoc.skip>
+        <gpg.skip>false</gpg.skip>
+      </properties>
+      <distributionManagement>
+        <snapshotRepository>
+          <id>ossrh</id>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+      </distributionManagement>
+    </profile>
+
+    <profile>
+      <id>milestone</id>
+      <properties>
+        <maven.javadoc.skip>false</maven.javadoc.skip>
+        <gpg.skip>false</gpg.skip>
+      </properties>
+      <distributionManagement>
+        <repository>
+          <id>packagecloud-rabbitmq-maven-milestones</id>
+          <url>packagecloud+https://packagecloud.io/rabbitmq/maven-milestones</url>
+        </repository>
+      </distributionManagement>
+    </profile>
+
+    <profile>
+      <id>release</id>
+      <properties>
+        <maven.javadoc.skip>false</maven.javadoc.skip>
+        <gpg.skip>false</gpg.skip>
+      </properties>
+      <build>
+        <plugins>
+
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>${nexus-staging-maven-plugin.version}</version>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>ossrh</serverId>
+              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+              <autoReleaseAfterClose>false</autoReleaseAfterClose>
+              <stagingProgressTimeoutMinutes>20</stagingProgressTimeoutMinutes>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+      <distributionManagement>
+        <repository>
+          <id>ossrh</id>
+          <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+      </distributionManagement>
+    </profile>
+    <profile>
+      <id>mockito-4-on-java-8</id>
+      <activation>
+        <jdk>1.8</jdk>
+      </activation>
+      <properties>
+        <mockito.version>4.11.0</mockito.version>
+      </properties>
+    </profile>
+    <profile>
+      <id>jvm-test-arguments-java-21-and-more</id>
+      <activation>
+        <jdk>[21,)</jdk>
+      </activation>
+      <properties>
+        <test-arguments>-XX:+EnableDynamicAgentLoading</test-arguments>
+      </properties>
+    </profile>
+
+    <profile>
+      <!-- this avoids a compiler warning on Java 9+ -->
+      <!-- the compiler setting is not available on Java 8 -->
+      <id>use-release-compiler-argument-on-java-9-or-more</id>
+      <activation>
+        <jdk>[9,)</jdk>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>${maven.compiler.plugin.version}</version>
+            <configuration>
+              <source>1.8</source>
+              <target>1.8</target>
+              <release>8</release>
+              <compilerArgs>
+                <arg>-Xlint:deprecation</arg>
+                <arg>-Xlint:unchecked</arg>
+              </compilerArgs>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+  </profiles>
+
+</project>

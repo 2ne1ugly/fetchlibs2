@@ -1,0 +1,8 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Sun Oct 13 07:11:26 GMT 2024
+https\://repo.maven.apache.org/maven2/.lastUpdated=1728803455185
+https\://www.jitpack.io/.error=Could not transfer artifact com.github.node-gradle\:com.github.node-gradle.gradle.plugin\:pom\:7.1.0 from/to jitpack (https\://www.jitpack.io)\: status code\: 401, reason phrase\: Unauthorized (401)
+@default-jitpack-https\://www.jitpack.io/.lastUpdated=1728803486672
+https\://plugins.gradle.org/m2/.lastUpdated=1728803456304
+https\://repo.maven.apache.org/maven2/.error=
+https\://plugins.gradle.org/m2/.error=
